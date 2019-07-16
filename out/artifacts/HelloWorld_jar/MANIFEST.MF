@@ -1,0 +1,2 @@
+Main-Class: controller.PokemonDemo
+Manifest-Version: 1.0
