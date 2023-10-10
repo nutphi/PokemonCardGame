@@ -11,6 +11,8 @@ import java.net.URLEncoder;
  * Created by nutph on 5/4/2017.
  */
 public abstract class Card extends JLabel implements ICard{
+    static final double bigImageRatio = 0.7; // for card image ratio suitable the screen
+    static final double imageRatio = 0.8; // for card image ratio suitable the screen
 
     //for search/deck ability
     public enum AbilityAction{
@@ -53,9 +55,9 @@ public abstract class Card extends JLabel implements ICard{
         this.type = type;
         this.name = name;
         this.filename = filename;
-        this.invisibleCardImage = new ImageIcon(getClass().getClassLoader().getResource("images/invisible.png"));
-        this.visibleCardImage = new ImageIcon(getClass().getClassLoader().getResource("images/normal1/"+filename+".jpg"));
-        this.bigVisibleCardImage = new ImageIcon(getClass().getClassLoader().getResource("images/big1/"+filename+".jpg"));
+        this.invisibleCardImage = loadAndResizeImage("images/invisible.png", imageRatio);
+        this.visibleCardImage = loadAndResizeImage("images/normal1/"+filename+".jpg", imageRatio);
+        this.bigVisibleCardImage = loadAndResizeImage("images/big1/"+filename+".jpg", bigImageRatio); // new ImageIcon(getClass().getClassLoader().getResource("images/big1/"+filename+".jpg"));
         this.abilityAction = AbilityAction.NON_ACTIVE;
 
         this.isVisibleCard = isVisibleCard;
@@ -66,6 +68,15 @@ public abstract class Card extends JLabel implements ICard{
             this.setIcon(invisibleCardImage);
     }
 
+    // to resize image base on ratio
+    private ImageIcon loadAndResizeImage(String imagePath, double scale) {
+        ImageIcon originalImageIcon = new ImageIcon(getClass().getClassLoader().getResource(imagePath));
+        Image originalImage = originalImageIcon.getImage();
+        int newWidth = originalImageIcon.getIconWidth();
+        int newHeight = (int) (originalImageIcon.getIconHeight() * scale);
+        Image resizedImage = originalImage.getScaledInstance(newWidth, newHeight, Image.SCALE_DEFAULT);
+        return new ImageIcon(resizedImage);
+    }
 
     private ImageIcon invisibleCardImage;
     private boolean isVisibleCard;

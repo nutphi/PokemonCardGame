@@ -8,27 +8,27 @@ import java.awt.*;
 public enum BoardPosition {
     HAND, ACTIVE_POKEMON, BENCH_POKEMON, DECK, TRASH, ITEM, STADIUM, REWARD;
 
-    static final Point playerDeckPosition = new Point(625,536);
-    static final Point playerTrashPosition = new Point(625,645);
-    static final Point playerActivePokemonPosition = new Point(325,505);
+    static final Point playerDeckPosition = new Point(625,(int)(536 * JPokemonBoard.ratioHeight) - JPokemonBoard.screenOffsetY);
+    static final Point playerTrashPosition = new Point(625,(int)(645 * JPokemonBoard.ratioHeight) - JPokemonBoard.screenOffsetY);
+    static final Point playerActivePokemonPosition = new Point(325,(int)(505 * JPokemonBoard.ratioHeight) - JPokemonBoard.screenOffsetY);
 
-    static final int playerHandY = 850;
-    static final int playerBenchY = 700;
+    static final int playerHandY = (int)(850 * JPokemonBoard.ratioHeight) - JPokemonBoard.screenOffsetY;
+    static final int playerBenchY = (int)(700 * JPokemonBoard.ratioHeight) - JPokemonBoard.screenOffsetY;
 
-    static final Point opponentDeckPosition = new Point(26,317);
-    static final Point opponentTrashPosition = new Point(26,206);
-    static final Point opponentActivePokemonPosition = new Point(325,346);
+    static final Point opponentDeckPosition = new Point(26,(int)(317 * JPokemonBoard.ratioHeight) - JPokemonBoard.screenOffsetY);
+    static final Point opponentTrashPosition = new Point(26,(int)(206 * JPokemonBoard.ratioHeight) - JPokemonBoard.screenOffsetY);
+    static final Point opponentActivePokemonPosition = new Point(325,(int)(346 * JPokemonBoard.ratioHeight) - JPokemonBoard.screenOffsetY);
 
     static final int opponentHandY = 0;
-    static final int opponentBenchY = 150;
+    static final int opponentBenchY = (int)(150 * JPokemonBoard.ratioHeight) - JPokemonBoard.screenOffsetY;
 
-    static final Point[] playerReward = {new Point(27,512),new Point(27,617),new Point(27,722),
-            new Point(53,520),new Point(53,625),new Point(53,730)};
+    static final Point[] playerReward = {new Point(27,(int)(512 * JPokemonBoard.ratioHeight) - JPokemonBoard.screenOffsetY),new Point(27,(int)(617 * JPokemonBoard.ratioHeight) - JPokemonBoard.screenOffsetY),new Point(27,(int)(722 * JPokemonBoard.ratioHeight) - JPokemonBoard.screenOffsetY),
+            new Point(53,(int)(520 * JPokemonBoard.ratioHeight) - JPokemonBoard.screenOffsetY),new Point(53,(int)(625 * JPokemonBoard.ratioHeight) - JPokemonBoard.screenOffsetY),new Point(53,(int)(730 * JPokemonBoard.ratioHeight) - JPokemonBoard.screenOffsetY)};
 
-    static final Point[] opponentReward = {new Point(624,134),new Point(624,239),new Point(624,344),
-            new Point(599,124),new Point(599,229),new Point(599,334)};
+    static final Point[] opponentReward = {new Point(624,(int)(134 * JPokemonBoard.ratioHeight) - JPokemonBoard.screenOffsetY),new Point(624,(int)(239 * JPokemonBoard.ratioHeight) - JPokemonBoard.screenOffsetY),new Point(624,(int)(344 * JPokemonBoard.ratioHeight) - JPokemonBoard.screenOffsetY),
+            new Point(599,(int)(124 * JPokemonBoard.ratioHeight) - JPokemonBoard.screenOffsetY),new Point(599,(int)(229 * JPokemonBoard.ratioHeight) - JPokemonBoard.screenOffsetY),new Point(599,(int)(334 * JPokemonBoard.ratioHeight) - JPokemonBoard.screenOffsetY)};
 
-    static final Point retreatPosition = new Point(500,550);
+    static final Point retreatPosition = new Point(500,(int)(550 * JPokemonBoard.ratioHeight) - JPokemonBoard.screenOffsetY);
 
     public static Point[] getRewardPosition(boolean isOpponent){
         return isOpponent?opponentReward:playerReward;

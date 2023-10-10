@@ -10,8 +10,6 @@ import javax.swing.*;
 
 import java.awt.*;
 
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Stack;
@@ -22,13 +20,16 @@ import java.util.Stack;
  * Created by nutph on 5/6/2017.
  */
 public class JPokemonBoard{
+    static final double ratioPosition = 0.75; // for play bench position
+    static final double ratioHeight = 0.8; // for card ratio and other on board
+    static final int screenOffsetY = 20;
     static final int screenWidth = 720;
     static final int screenHeight = 950;
     static final int cardWidth = 70;
-    static final int cardHeight = 100;
+    static final int cardHeight = (int)(100 * ratioHeight) ;
     static final int benchWidth = 470;
     static final int benchStartOpponentX = 110;
-    static final int benchStartOpponentY = 150;
+    static final int benchStartOpponentY = (int)(150 * ratioHeight);
     static final int benchStartPlayerX = 135;
     static final int benchStartPlayerY = 700;
 
@@ -55,12 +56,12 @@ public class JPokemonBoard{
         }else if(!isOpponent&&!isBench){
             //System.out.println("player hand cards");
             for (int i = cardNumber; i > 0; i--) {
-                position.add(new Point(i * (screenWidth-cardWidth)/(1+cardNumber)-cardWidth/2, screenHeight-cardHeight));
+                position.add(new Point(i * (screenWidth-cardWidth)/(1+cardNumber)-cardWidth/2, (int)((screenHeight-cardHeight) * ratioPosition)));
             }
         }else{
             //System.out.println("player bench cards");
             for (int i = cardNumber; i > 0; i--) {
-                position.add(new Point(((cardNumber-i) * benchWidth/cardNumber)+benchStartPlayerX, benchStartPlayerY));
+                position.add(new Point(((cardNumber-i) * benchWidth/cardNumber)+benchStartPlayerX, (int)((benchStartPlayerY) * ratioPosition)));
             }
         }
         return position;
@@ -93,9 +94,12 @@ public class JPokemonBoard{
         screen.setIconImage(m);
         //'40' is the title on the top
         screen.setBounds(0,0,screenWidth,screenHeight+40);
-        ImageIcon bgImg = new ImageIcon(getClass().getClassLoader().getResource("images/pokemon-board.jpg"));
+        ImageIcon bgIcon = new ImageIcon(getClass().getClassLoader().getResource("images/pokemon-board.jpg"));
+        Image originalImage = bgIcon.getImage();
+        Image resizedImage = originalImage.getScaledInstance(screenWidth, (int) (screenHeight * ratioHeight), Image.SCALE_DEFAULT);
+        ImageIcon resizedIcon = new ImageIcon(resizedImage);
         board = new JLabel();
-        board.setIcon(bgImg);
+        board.setIcon(resizedIcon);
 
         //three steps for non-layout
         board.setLayout(null);
@@ -113,7 +117,7 @@ public class JPokemonBoard{
         doneBtn = new JButton("done");
         doneBtn.setFont(new Font("Courier", Font.PLAIN,24));
 
-        doneBtn.setBounds(screenWidth-100,screenHeight-195,90,90);
+        doneBtn.setBounds(screenWidth-100, (int)((screenHeight-195) * ratioHeight),90,90);
         doneBtn.setLayout(null);
         board.add(doneBtn);
         doneBtn.setVisible(false);
