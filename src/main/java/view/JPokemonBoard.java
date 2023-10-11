@@ -92,6 +92,17 @@ public class JPokemonBoard{
         screen = new JFrame("Pokemon Trading Card Game");
         Image m = (new ImageIcon(getClass().getClassLoader().getResource("images/icon.png"))).getImage();
         screen.setIconImage(m);
+
+        Taskbar taskbar = Taskbar.getTaskbar();
+        try {
+            //set icon for mac os (and other systems which do support this method)
+            taskbar.setIconImage(m);
+        } catch (final UnsupportedOperationException e) {
+            System.err.println("The os does not support: 'taskbar.setIconImage'");
+        } catch (final SecurityException e) {
+            System.err.println("There was a security exception for: 'taskbar.setIconImage'");
+        }
+
         //'40' is the title on the top
         screen.setBounds(0,0,screenWidth,screenHeight+40);
         ImageIcon bgIcon = new ImageIcon(getClass().getClassLoader().getResource("images/pokemon-board.jpg"));
