@@ -31,6 +31,13 @@
             <configuration>
                 <source>1.8</source>
                 <target>1.8</target>
+                <archive>
+                    <manifest>
+                        <addClasspath>true</addClasspath>
+                        <classpathPrefix>controller/</classpathPrefix>
+                        <mainClass>controller.PokemonDemo</mainClass>
+                    </manifest>
+                </archive>
             </configuration>
         </plugin>
         </plugins>
